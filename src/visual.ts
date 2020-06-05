@@ -103,7 +103,15 @@ export class Visual implements IVisual {
                 if (target.getElementsByTagName("input")[1]) {
                     target.getElementsByTagName("input")[1].value = options.dataViews[0].categorical.values[0].values[0].toString();
                 }
-
+                // Web page stuff
+                let category = target.getElementsByClassName("category")[0];
+                if(category) {
+                    console.log("Got Category");
+                    category.innerHTML = options.dataViews[0].categorical.categories[0].values[0].toString();
+                }
+                else{
+                    console.log("No Category");
+                }
             };
             xhr.onerror = function () {
                 target.appendChild(document.createTextNode("Document not loaded, check Url"));
