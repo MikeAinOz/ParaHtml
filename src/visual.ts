@@ -112,6 +112,15 @@ export class Visual implements IVisual {
                 else{
                     console.log("No Category");
                 }
+                let measure = target.getElementsByClassName("measure")[0];
+                if(measure){
+                    console.log("Got Measure")
+                    measure.innerHTML = options.dataViews[0].categorical.values[0].values[0].toString();
+                }
+                else{
+                    console.log("No Measure")
+                }
+
             };
             xhr.onerror = function () {
                 target.appendChild(document.createTextNode("Document not loaded, check Url"));
