@@ -25,7 +25,7 @@ Javascript within the HTML using SCRIPT Tags is nor executed, not to sure why, n
 
 At the moment the HTML is executed every time the visual changes, this may be modified to only load if the setting changes.
 
-The Target works with the form submit button, a JSON Object of the form fields is sent to the target. This has been tested with Power Automate AHA Fkiw
+The Target works with the form submit button, a JSON Object of the form fields like this: {"Dose":"2","Length":"52.20"} , is sent to the target. This has been tested with Power Automate AKA Flow, I got a CORS related error posting to Zapier
 
 
 

@@ -32,29 +32,13 @@ import DataViewObjectsParser = dataViewObjectsParser.DataViewObjectsParser;
 export class VisualSettings extends DataViewObjectsParser {
       public sourceUrl: sourceUrlSettings = new sourceUrlSettings();
       public targetUrl: targetUrlSettings = new targetUrlSettings();
-      public dataPoint: dataPointSettings = new dataPointSettings();
-      }
-
-    export class dataPointSettings {
-     // Default color
-      public defaultColor: string = "";
-     // Show all
-      public showAllDataPoints: boolean = true;
-     // Fill
-      public fill: string = "";
-     // Color saturation
-      public fillRule: string = "";
-     // Text Size
-      public fontSize: number = 12;
-     }
+      }    
      export class sourceUrlSettings {
       // Target Url
-      public sourceUrl: string = "https://";
-      
+      public sourceUrl: string = "https://"; 
     }
     export class targetUrlSettings {
       // Target Url
-      public targetUrl: string = "https://";
-      
+      public targetUrl: string = "https://"; 
     }
 

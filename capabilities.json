@@ -12,69 +12,24 @@
         }
     ],
     "objects": {
-        "sourceUrl":{
+        "sourceUrl": {
             "displayName": "Source Url",
-            "properties" : {
-                "sourceUrl":{
-                    "displayName": "Source URL",
-                        "type": {
-                        "text": true
-                        }
-                    }
-                }
-            },
-        "targetUrl":{
-            "displayName": "Target Url",
-            "properties" : {
-                "targetUrl":{
-                    "displayName": "Target URL",
-                        "type": {
-                        "text": true
-                        }
-                    }
-                }
-            },
-        "dataPoint": {
-            "displayName": "Data colors",
             "properties": {
-                "defaultColor": {
-                    "displayName": "Default color",
+                "sourceUrl": {
+                    "displayName": "Source URL",
                     "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
+                        "text": true
                     }
-                },
-                "showAllDataPoints": {
-                    "displayName": "Show all",
+                }
+            }
+        },
+        "targetUrl": {
+            "displayName": "Target Url",
+            "properties": {
+                "targetUrl": {
+                    "displayName": "Target URL",
                     "type": {
-                        "bool": true
-                    }
-                },
-                "fill": {
-                    "displayName": "Fill",
-                    "type": {
-                        "fill": {
-                            "solid": {
-                                "color": true
-                            }
-                        }
-                    }
-                },
-                "fillRule": {
-                    "displayName": "Color saturation",
-                    "type": {
-                        "fill": {}
-                    }
-                },
-                 "fontSize": {
-                    "displayName": "Text Size",
-                    "type": {
-                        "formatting": {
-                            "fontSize": true
-                        }
+                        "text": true
                     }
                 }
             }

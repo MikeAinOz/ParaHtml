@@ -27,7 +27,6 @@
 
 import "core-js/stable";
 import "./../style/visual.less";
-import * as $ from "jquery";
 import powerbi from "powerbi-visuals-api";
 import VisualConstructorOptions = powerbi.extensibility.visual.VisualConstructorOptions;
 import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
@@ -70,23 +69,21 @@ export class Visual implements IVisual {
 
                 target.appendChild(parseBody(responseDOM));
 
-                let form = target.getElementsByTagName("form");
-                if (form[0]) {
-                    const finalMsg = document.createElement("p");
-                    finalMsg.setAttribute('id', "final_msg");
-                    finalMsg.hidden = true;
-                    var new_message = document.createTextNode("Message posted");
-                    finalMsg.appendChild(new_message);
-                    target.appendChild(finalMsg);
-                    const failMsg = document.createElement("p");
-                    failMsg.setAttribute('id', "fail_msg");
-                    failMsg.hidden = true;
-                    var new_message = document.createTextNode("POST failed, check URL");
-                    failMsg.appendChild(new_message);
-                    target.appendChild(failMsg);
-                    form[0].onclick = (e) => {
-                        target.getElementsByTagName("button")[0].innerText = "Awesome";
-                        clickFunction(form[0], settings);
+                let form: HTMLFormElement = target.getElementsByTagName("form")[0]as HTMLFormElement;
+                if (form) {
+                    const message = document.createElement("p");
+                    message.setAttribute('class', "message");
+                    form.appendChild(message);
+                    /*
+                    form.onsubmit = (e) => {
+                        form.getElementsByTagName("button")[0].innerText = "Awesome";
+                        clickFunction(form, settings);
+                        e.preventDefault();
+                    }
+                    */
+                    let button = form.getElementsByTagName("button")[0];
+                    button.onclick = (e) => {
+                        clickFunction(form, settings);
                         e.preventDefault();
                     }
                 }
@@ -105,22 +102,15 @@ export class Visual implements IVisual {
                 }
                 // Web page stuff
                 let category = target.getElementsByClassName("category")[0];
-                if(category) {
+                if (category) {
                     console.log("Got Category");
                     category.innerHTML = options.dataViews[0].categorical.categories[0].values[0].toString();
                 }
-                else{
-                    console.log("No Category");
-                }
-                let measure = target.getElementsByClassName("measure")[0];
-                if(measure){
+                               let measure = target.getElementsByClassName("measure")[0];
+                if (measure) {
                     console.log("Got Measure")
                     measure.innerHTML = options.dataViews[0].categorical.values[0].values[0].toString();
                 }
-                else{
-                    console.log("No Measure")
-                }
-
             };
             xhr.onerror = function () {
                 target.appendChild(document.createTextNode("Document not loaded, check Url"));
@@ -134,47 +124,32 @@ export class Visual implements IVisual {
                 return elementOne;
             }
             function clickFunction(form: HTMLFormElement, settings) {
-
                 let category = form.getElementsByTagName("input")[0];
                 let measure = form.getElementsByTagName("input")[1];
                 let payload = Object.create(null);
                 payload[target.getElementsByTagName("label")[0].innerText] = category.value;
                 payload[target.getElementsByTagName("label")[1].innerText] = measure.value;
-                btnClick(payload, settings.targetUrl.targetUrl)
-
+                btnClick(form, payload, settings.targetUrl.targetUrl)
             }
-            function btnClick(payload, targetUrl) {
+            function btnClick(form: HTMLFormElement, payload, targetUrl) {
                 console.log("button Click");
                 let sendData = JSON.stringify(payload);
                 console.log(sendData);
-                $.ajax({
-                    url: targetUrl,
-                    type: "POST",
-                    data: sendData,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        $('#final_msg').fadeIn();;
-                        setTimeout(function () {
-                            $('#final_msg').fadeOut();
-                        }, 10000)
-                    },
-
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        $('#fail_msg').fadeIn();;
-                        alert(errorThrown);
-                        alert(textStatus);
-                    },
-                    statusCode: {
-                        202: function () {
-                            alert("202");
-                        }
+                let xhr = new XMLHttpRequest();
+                let url = targetUrl;
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                        form.getElementsByClassName("message")[0].innerHTML = "Form Posted";
                     }
-                });
+                    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status != 200) {
+                        form.getElementsByClassName("message")[0].innerHTML = "Error " + xhr.status.toString();
+                    }
+                }
+                xhr.send(sendData);
             }
-
         }
-
     }
 
     private static parseSettings(dataView: DataView): VisualSettings {
