@@ -35,6 +35,7 @@ import EnumerateVisualObjectInstancesOptions = powerbi.EnumerateVisualObjectInst
 import VisualObjectInstance = powerbi.VisualObjectInstance;
 import DataView = powerbi.DataView;
 import VisualObjectInstanceEnumerationObject = powerbi.VisualObjectInstanceEnumerationObject;
+import { valueFormatter } from "powerbi-visuals-utils-formattingutils";
 
 import { VisualSettings } from "./settings";
 
@@ -74,13 +75,6 @@ export class Visual implements IVisual {
                     const message = document.createElement("p");
                     message.setAttribute('class', "message");
                     form.appendChild(message);
-                    /*
-                    form.onsubmit = (e) => {
-                        form.getElementsByTagName("button")[0].innerText = "Awesome";
-                        clickFunction(form, settings);
-                        e.preventDefault();
-                    }
-                    */
                     let button = form.getElementsByTagName("button")[0];
                     button.onclick = (e) => {
                         clickFunction(form, settings);
@@ -98,7 +92,8 @@ export class Visual implements IVisual {
                     target.getElementsByTagName("input")[0].value = options.dataViews[0].categorical.categories[0].values[0].toString();
                 }
                 if (target.getElementsByTagName("input")[1]) {
-                    target.getElementsByTagName("input")[1].value = options.dataViews[0].categorical.values[0].values[0].toString();
+                    let iValueFormatter = valueFormatter.create({ format: options.dataViews[0].categorical.values[0].source.format });
+                    target.getElementsByTagName("input")[1].value = iValueFormatter.format(options.dataViews[0].categorical.values[0].values[0]);
                 }
                 // Web page stuff
                 let category = target.getElementsByClassName("category")[0];
@@ -109,7 +104,15 @@ export class Visual implements IVisual {
                                let measure = target.getElementsByClassName("measure")[0];
                 if (measure) {
                     console.log("Got Measure")
-                    measure.innerHTML = options.dataViews[0].categorical.values[0].values[0].toString();
+                    let iValueFormatter = valueFormatter.create({ format: options.dataViews[0].categorical.values[0].source.format });
+                    measure.innerHTML = iValueFormatter.format(options.dataViews[0].categorical.values[0].values[0]);
+                }
+                // SVG Text Element
+                if (target.getElementsByTagName("text")[0]) {
+                    console.log("Set Text", options.dataViews[0].categorical.values[0].values[0]);
+                    let iValueFormatter = valueFormatter.create({ format: options.dataViews[0].categorical.values[0].source.format });
+                    target.getElementsByTagName("text")[0].textContent = 
+                         iValueFormatter.format(options.dataViews[0].categorical.values[0].values[0]);
                 }
             };
             xhr.onerror = function () {

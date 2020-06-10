@@ -1,1 +1,25 @@
-{"visual":{"name":"parahtml","displayName":"parahtml","guid":"parahtmlB099D073F6E2497584A67D3FB9631E15","visualClassName":"Visual","version":"1.0.0","description":"","supportUrl":"","gitHubUrl":""},"apiVersion":"2.6.0","author":{"name":"","email":""},"assets":{"icon":"assets/icon.png"},"externalJS":null,"style":"style/visual.less","capabilities":"capabilities.json","dependencies":null,"stringResources":[]}
+{
+    "visual": {
+        "name": "parahtml",
+        "displayName": "parahtml",
+        "guid": "parahtmlB099D073F6E2497584A67D3FB9631E15",
+        "visualClassName": "Visual",
+        "version": "1.0.0",
+        "description": "HTML Viewer",
+        "supportUrl": "https://paradigmbi.com.au",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "2.6.0",
+    "author": {
+        "name": "Mike Allen",
+        "email": "mike@mikeallen.com.au"
+    },
+    "assets": {
+        "icon": "assets/HTMLIconSmall.png"
+    },
+    "externalJS": [],
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": []
+}
