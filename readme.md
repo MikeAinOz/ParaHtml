@@ -17,13 +17,13 @@ Inital proof-of-concept implementation caters for one category and one measure. 
 
 The form mode runs first and allocates the Category and Measure names to the "label" elements and the values to the "input" elements.
 
-The Page mode just does values to a "Category" and Measure class. there are two samples for that, the OKY sample is more decorative.
+The Page mode just does values to a "Category" and "Measure" class. there are two samples for that, the OKY sample is more decorative.
 
-SVG is parsing just fine, there's an SVG example.
+SVG is parsing just fine, there's an SVG example. SVG Substitutes the measure into the first Text item in the SVG
 
 Javascript within the HTML using SCRIPT Tags is nor executed, not to sure why, not too concerned.
 
-At the moment the HTML is executed every time the visual changes, this may be modified to only load if the setting changes.
+At the moment the HTML is loaded every time the visual changes, this may be modified to only load if the setting changes.
 
 The Visual requires a Category and Measure even if they are not used.
 
