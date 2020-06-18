@@ -62,15 +62,21 @@ export class Visual implements IVisual {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", this.settings.sourceUrl.sourceUrl, true);
             xhr.onload = function () {
-                const parser = new DOMParser();
-                const responseDOM: Document = parser.parseFromString(xhr.responseText, 'text/html');
                 while (target.firstChild) {
                     target.removeChild(target.lastChild);
                 }
-
-                target.appendChild(parseBody(responseDOM));
-
-                let form: HTMLFormElement = target.getElementsByTagName("form")[0]as HTMLFormElement;
+                // Test for SVG
+                if (xhr.responseText.substring(2, 5) == 'xml') {
+                    let div = document.createElement("div");
+                    div.innerHTML = xhr.responseText;
+                    target.appendChild(div);
+                }
+                else {
+                    const parser = new DOMParser();
+                    const responseDOM: Document = parser.parseFromString(xhr.responseText, 'text/html');
+                    target.appendChild(parseBody(responseDOM));
+                }
+                let form: HTMLFormElement = target.getElementsByTagName("form")[0] as HTMLFormElement;
                 if (form) {
                     const message = document.createElement("p");
                     message.setAttribute('class', "message");
@@ -101,7 +107,7 @@ export class Visual implements IVisual {
                     console.log("Got Category");
                     category.innerHTML = options.dataViews[0].categorical.categories[0].values[0].toString();
                 }
-                               let measure = target.getElementsByClassName("measure")[0];
+                let measure = target.getElementsByClassName("measure")[0];
                 if (measure) {
                     console.log("Got Measure")
                     let iValueFormatter = valueFormatter.create({ format: options.dataViews[0].categorical.values[0].source.format });
@@ -111,8 +117,8 @@ export class Visual implements IVisual {
                 if (target.getElementsByTagName("text")[0]) {
                     console.log("Set Text", options.dataViews[0].categorical.values[0].values[0]);
                     let iValueFormatter = valueFormatter.create({ format: options.dataViews[0].categorical.values[0].source.format });
-                    target.getElementsByTagName("text")[0].textContent = 
-                         iValueFormatter.format(options.dataViews[0].categorical.values[0].values[0]);
+                    target.getElementsByTagName("text")[0].textContent =
+                        iValueFormatter.format(options.dataViews[0].categorical.values[0].values[0]);
                 }
             };
             xhr.onerror = function () {

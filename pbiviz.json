@@ -4,10 +4,10 @@
         "displayName": "parahtml",
         "guid": "parahtmlB099D073F6E2497584A67D3FB9631E15",
         "visualClassName": "Visual",
-        "version": "1.0.0",
-        "description": "HTML Viewer",
+        "version": "1.0.1",
+        "description": "HTML and SVG Viewer",
         "supportUrl": "https://paradigmbi.com.au",
-        "gitHubUrl": ""
+        "gitHubUrl": "https://github.com/MikeAinOz/ParaHtml"
     },
     "apiVersion": "2.6.0",
     "author": {
