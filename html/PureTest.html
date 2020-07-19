@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css">  
+  </head>
+<body>
+
+<h2>HTML Form with category and measure</h2>
+
+<p>This is an HTML page loaded using a URL and uses Pure CSS the measure is an email address, USERNAME() in example</p> 
+
+<form class="pure-form pure-form-stacked">
+  <fieldset>
+      <legend>A Stacked Form</legend>
+      <label for="aligned-foo">Message </label>
+      <input type="text" id="aligned-foo" placeholder="Enter something here..." />
+      <label for="stacked-email">Email</label>
+      <input type="email" id="stacked-email" placeholder="Email" />
+      <span class="pure-form-message">This is a required field.</span>   
+      <label for="stacked-password">Password</label>
+      <input type="password" id="stacked-password" placeholder="Password" />
+      <label for="stacked-state">State</label>
+      <select id="stacked-state">
+          <option>QLD</option>
+          <option>NSW</option>
+          <option>VIC</option>
+      </select>
+      <label for="stacked-remember" class="pure-checkbox">
+          <input type="checkbox" id="stacked-remember" /> Remember me</label>
+      <button type="submit" class="pure-button pure-button-primary">Send</button>
+  </fieldset>
+</form>
+
+<p id="demo">When you click it will submit the Form to the target URL</p>
+
+
+
+
+</body>
+</html>

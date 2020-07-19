@@ -15,7 +15,8 @@
     "powerbi-visuals-api": "~2.6.1",
     "powerbi-visuals-utils-formattingutils": "^4.6.0",
     "powerbi-visuals-utils-svgutils": "^2.2.1",
-    "powerbi-visuals-utils-typeutils": "^2.2.1"
+    "powerbi-visuals-utils-typeutils": "^2.2.1",
+    "purecss": "^2.0.3"
   },
   "devDependencies": {
     "ts-loader": "6.1.0",
